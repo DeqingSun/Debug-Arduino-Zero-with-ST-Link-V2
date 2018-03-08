@@ -98,7 +98,31 @@ The third one resumes Arduino to work. You should see LED blinking again.
 
 If everything works so far, close all terminal windows and we are ready to setup VScode.
 
+## Step 4, setup VScode
 
+First download VScode from <https://code.visualstudio.com/>
 
+![download VScode](https://github.com/DeqingSun/Debug-Arduino-Zero-with-ST-Link-V2/raw/master/img/downloadVScode.png)
 
+Then you install Arduino extension. Click reload after you finish install.
+
+![installArduino](https://github.com/DeqingSun/Debug-Arduino-Zero-with-ST-Link-V2/raw/master/img/vscodeInstallArduino.png)
+
+Save your Arduino Sketch somewhere, and open it in VScode with "Open Folder".
+
+![installArduino](https://github.com/DeqingSun/Debug-Arduino-Zero-with-ST-Link-V2/raw/master/img/vscodeOpenFolder.png)
+
+Then you set Board and Port, just the same ones to your settings in Step 1.
+
+![set board and port](https://github.com/DeqingSun/Debug-Arduino-Zero-with-ST-Link-V2/raw/master/img/vscodeSetBoardPort.png)
+
+Press "Option+Command+U", VScode should compile and upload your code.
+
+![set board and port](https://github.com/DeqingSun/Debug-Arduino-Zero-with-ST-Link-V2/raw/master/img/vscodeUpload.png)
+
+You can include <Ardiuno.h> in your arduino sketch to fix error marks under Arduino functions. 
+
+![Add include](https://github.com/DeqingSun/Debug-Arduino-Zero-with-ST-Link-V2/raw/master/img/vscodeInclude.png)
+
+Also you can use "View" -> "Command Palette" to see all Arduino commands.
 

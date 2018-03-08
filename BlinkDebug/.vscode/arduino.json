@@ -1,0 +1,5 @@
+{
+    "board": "arduino:samd:arduino_zero_native",
+    "port": "/dev/cu.usbmodem141241",
+    "sketch": "BlinkDebug.ino"
+}
