@@ -78,7 +78,6 @@ Now we keep it running, open another terminal window and type
 
 ```
 /Users/sundeqing/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/bin/arm-none-eabi-gdb
-
 ```
 
 Then you type
