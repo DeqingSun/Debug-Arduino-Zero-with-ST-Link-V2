@@ -54,19 +54,20 @@ Depending on your tool version, GDB should be in somewhere like:
 
 ## Step 3, test whether OpenOCD and GDB is functional with terminal
 
-Open a terminal window and paste following commands. If your files are located in a different folder from mine, edit the path accordingly.
+**Here is a tricky part.** For some reason, the Arduino zero's ID is different from the one in the OpenOCD target. Also, with a bootloader, we don't want to have debugger change the flash content. So I copied at91samdXX.cfg to at91samdXXZero.cfg in this repo to solve the issues
+
+Open a terminal window and paste following commands. If your files are located in a different folder from mine, edit the path accordingly. Always change the username to yours.
 
 ```
-~/Library/Arduino15/packages/arduino/tools/openocd/0.9.0-arduino6-static/bin/openocd -f ~/Library/Arduino15/packages/arduino/tools/openocd/0.9.0-arduino6-static/share/openocd/scripts/interface/stlink-v2.cfg -c "set CPUTAPID 0x0bc11477" -f ~/Library/Arduino15/packages/arduino/tools/openocd/0.9.0-arduino6-static/share/openocd/scripts/board/arduino_zero.cfg -s ~/Library/Arduino15/packages/arduino/tools/openocd/0.9.0-arduino6-static/share/openocd/scripts
+/Users/sundeqing/Library/Arduino15/packages/arduino/tools/openocd/0.9.0-arduino6-static/bin/openocd -f /Users/sundeqing/Library/Arduino15/packages/arduino/tools/openocd/0.9.0-arduino6-static/share/openocd/scripts/interface/stlink-v2.cfg -f /Users/sundeqing/Documents/Github/Debug-Arduino-Zero-with-ST-Link-V2/at91samdXXZero.cfg -s /Users/sundeqing/Library/Arduino15/packages/arduino/tools/openocd/0.9.0-arduino6-static/share/openocd/scripts
 ``` 
 
 The command is absurdly long because there is a path with everything. Here I will explain what it means:
 
 The openocd command works in this way:
 
-openocd -f *config\_file\_for\_debugger* -c *command\_to\_set\_CPUID* -f *config\_file\_for\_board\_or\_CPU* -s *dir\_to\_search\_for\_config\_files\_and\_scripts*
+openocd -f *config\_file\_for\_debugger* -f *config\_file\_for\_board\_or\_CPU* -s *dir\_to\_search\_for\_config\_files\_and\_scripts*
 
-The reason why I put a command "set CPUTAPID 0x0bc11477", is that I got an id mismatch error without this command. So I used this command to override ID in config files.
 
 If everthing works well, you should see it working:
 
@@ -76,7 +77,7 @@ Now we keep it running, open another terminal window and type
 
 
 ```
-~/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/bin/arm-none-eabi-gdb
+/Users/sundeqing/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/bin/arm-none-eabi-gdb
 
 ```
 
@@ -120,9 +121,33 @@ Press "Option+Command+U", VScode should compile and upload your code.
 
 ![set board and port](https://github.com/DeqingSun/Debug-Arduino-Zero-with-ST-Link-V2/raw/master/img/vscodeUpload.png)
 
-You can include <Ardiuno.h> in your arduino sketch to fix error marks under Arduino functions. 
+You can include <Arduino.h> in your arduino sketch to fix error marks under Arduino functions. 
 
 ![Add include](https://github.com/DeqingSun/Debug-Arduino-Zero-with-ST-Link-V2/raw/master/img/vscodeInclude.png)
 
-Also you can use "View" -> "Command Palette" to see all Arduino commands.
+Also, you can use "View" -> "Command Palette" to see all Arduino commands.
+
+## Step 5, setup debugging in VScode
+
+Goto "Debug" view and add configuration, add Arduino one.
+
+![Add config](https://github.com/DeqingSun/Debug-Arduino-Zero-with-ST-Link-V2/raw/master/img/vscodeAddConfig.png)
+
+You will have a default configuration, no need to add more.
+
+![Default config](https://github.com/DeqingSun/Debug-Arduino-Zero-with-ST-Link-V2/raw/master/img/vscodeDefaultConfig.png)
+
+From here, you want to edit "miDebuggerPath", "debugServerPath" and "debugServerArgs". Use ones you tested in Step 3. OpenOCD is your debugServer, GDB is your debugger.
+
+![edited path](https://github.com/DeqingSun/Debug-Arduino-Zero-with-ST-Link-V2/raw/master/img/vscodeEdited.png)
+
+Now, you go back you code, add some variable (so you can see it) and upload code again before we debug it. You can also add breakpoints.
+
+![edited code](https://github.com/DeqingSun/Debug-Arduino-Zero-with-ST-Link-V2/raw/master/img/vscodeFinalCode.png)
+
+Press F5 and happy debugging.
+
+![edited code](https://github.com/DeqingSun/Debug-Arduino-Zero-with-ST-Link-V2/raw/master/img/vscodeDebugging.png)
+
+
 

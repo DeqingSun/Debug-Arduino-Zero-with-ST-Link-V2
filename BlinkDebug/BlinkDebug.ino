@@ -1,12 +1,15 @@
-#include <Ardiuno.h>
+#include <Arduino.h>
 
 void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
 }
 
 void loop() {
+  volatile int a=0;
+  a=1;
   digitalWrite(LED_BUILTIN, HIGH); 
-  delay(1000);
+  delay(100);
+  a=0;  
   digitalWrite(LED_BUILTIN, LOW); 
-  delay(1000);
+  delay(100);
 }
