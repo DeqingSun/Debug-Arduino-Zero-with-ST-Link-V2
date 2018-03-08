@@ -1,6 +1,6 @@
 # Debug Arduino Zero with ST-Link V2
 
-##Overview
+## Overview
  
 Arduino Zero has an Atmel’s SAMD21 MCU with SWD debug support. The cheapest SWD debugger I know is a non-official ST-Link V2. It looks like a thumb drive with a 10-pin IDE on its end, and you can get it for around $2 from eBay or AliExpress, etc.
 
@@ -8,7 +8,7 @@ Arduino IDE doesn't support debugging when I write this. But the Boards Manager 
 
 This tutorial is using Mac OS as an example. But I'll explain every detail to help you understand and use it on other platforms.  
 
-##Hardware I used
+## Hardware I used
 
 ![front img](https://github.com/DeqingSun/Debug-Arduino-Zero-with-ST-Link-V2/raw/master/img/ArduinoSTLinkFront.jpg)
 
@@ -16,13 +16,13 @@ This tutorial is using Mac OS as an example. But I'll explain every detail to he
 
 I used an "Adafruit Feather M0 Basic Proto", soldered swdio and swclk pads on the back, 3.3V and GND to a connector. Then I connect these 4 pins to an ST-Link V2 with female wires. 
 
-##Step 1, get Blink example working
+## Step 1, get Blink example working
 
 ![Blink img](https://github.com/DeqingSun/Debug-Arduino-Zero-with-ST-Link-V2/raw/master/img/blinkExample.png)
 
 I'll skip details on how to install board support, select board and upload examples. There are tons of tutorial you can follow. As long as you can upload a Blink example to Arduino Zero, it shows your Arduino, Boards manager, driver, Arduino Zero, are all working properly.
 
-##Step 2, check if all OpenOCD files are ready
+## Step 2, check if all OpenOCD files are ready
 
 In order to debug Arduino Zero, you need 2 tools (comes with Arduino SAMD Boards):
 
