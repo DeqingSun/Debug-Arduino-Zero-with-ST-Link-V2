@@ -34,23 +34,71 @@ All these tools should be in ~/Library/Arduino15/packages/arduino/tools/
 
 You can open finder to double check if they are installed.
 
+![OpenOCD](https://github.com/DeqingSun/Debug-Arduino-Zero-with-ST-Link-V2/raw/master/img/openOcdLocation.png)
+
+Depending on your tool version, OpenOCD should be in somewhere like: 
+
+~/Library/Arduino15/packages/arduino/tools/openocd/0.9.0-arduino6-static/bin/openocd
+
+![script folder](https://github.com/DeqingSun/Debug-Arduino-Zero-with-ST-Link-V2/raw/master/img/scriptsLocation.png)
+
+Depending on your tool version, scripts for OpenOCD should be in somewhere like: 
+
+~/Library/Arduino15/packages/arduino/tools/openocd/0.9.0-arduino6-static/share/openocd/scripts
+
+![GDB](https://github.com/DeqingSun/Debug-Arduino-Zero-with-ST-Link-V2/raw/master/img/gdbLocation.png)
+
+Depending on your tool version, GDB should be in somewhere like: 
+
+~/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/bin/arm-none-eabi-gdb
+
+##Step 3, test whether OpenOCD and GDB is functional with terminal
+
+Open a terminal window and paste following commands. If your files are located in a different folder from mine, edit the path accordingly.
+
+```
+~/Library/Arduino15/packages/arduino/tools/openocd/0.9.0-arduino6-static/bin/openocd -f ~/Library/Arduino15/packages/arduino/tools/openocd/0.9.0-arduino6-static/share/openocd/scripts/interface/stlink-v2.cfg -c "set CPUTAPID 0x0bc11477" -f ~/Library/Arduino15/packages/arduino/tools/openocd/0.9.0-arduino6-static/share/openocd/scripts/board/arduino_zero.cfg -s ~/Library/Arduino15/packages/arduino/tools/openocd/0.9.0-arduino6-static/share/openocd/scripts
+``` 
+
+The command is absurdly long because there is a path with everything. Here I will explain what it means:
+
+The openocd command works in this way:
+
+openocd -f *config\_file\_for\_debugger* -c *command\_to\_set\_CPUID* -f *config\_file\_for\_board\_or\_CPU* -s *dir\_to\_search\_for\_config\_files\_and\_scripts*
+
+The reason why I put a command "set CPUTAPID 0x0bc11477", is that I got an id mismatch error without this command. So I used this command to override ID in config files.
+
+If everthing works well, you should see it working:
+
+![openocd working](https://github.com/DeqingSun/Debug-Arduino-Zero-with-ST-Link-V2/raw/master/img/openOcdWorking.png)
+
+Now we keep it running, open another terminal window and type
+
+
+```
+~/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/bin/arm-none-eabi-gdb
+
+```
+
+Then you type
+
+```
+target remote localhost:3333
+monitor reset halt
+continue
+```
+
+The first command let GDB should connect to OpenOCD.
+
+The second one resets and halts CPU. Arduino should stop working and LED should be OFF.
+
+The third one resumes Arduino to work. You should see LED blinking again.
+
+![gdb working](https://github.com/DeqingSun/Debug-Arduino-Zero-with-ST-Link-V2/raw/master/img/gdbWorking.png)
+
+If everything works so far, close all terminal windows and we are ready to setup VScode.
 
 
 
 
-
-
-
-/Users/sundeqing/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/bin/arm-none-eabi-gdb
-
-STlink:
-
-/Users/sundeqing/Library/Arduino15/packages/arduino/tools/openocd/0.9.0-arduino6-static/bin/openocd -f /Users/sundeqing/Library/Arduino15/packages/arduino/tools/openocd/0.9.0-arduino6-static/share/openocd/scripts/interface/stlink-v2.cfg -s /Users/sundeqing/Library/Arduino15/packages/arduino/tools/openocd/0.9.0-arduino6-static/share/openocd/scripts -f /Users/sundeqing/Library/Arduino15/packages/arduino/tools/openocd/0.9.0-arduino6-static/share/openocd/scripts/target/at91samdXXCOPY.cfg 
-
-/Users/sundeqing/Library/Arduino15/packages/arduino/tools/openocd/0.9.0-arduino6-static/bin/openocd -f /Users/sundeqing/Library/Arduino15/packages/arduino/tools/openocd/0.9.0-arduino6-static/share/openocd/scripts/interface/stlink-v2.cfg -c "set CPUTAPID 0x0bc11477" -f /Users/sundeqing/Library/Arduino15/packages/arduino/tools/openocd/0.9.0-arduino6-static/share/openocd/scripts/board/arduino_zero.cfg -s /Users/sundeqing/Library/Arduino15/packages/arduino/tools/openocd/0.9.0-arduino6-static/share/openocd/scripts
-
-
-JLINK:
-
-/Users/sundeqing/Library/Arduino15/packages/arduino/tools/openocd/0.9.0-arduino6-static/bin/openocd -f /Users/sundeqing/Library/Arduino15/packages/arduino/tools/openocd/0.9.0-arduino6-static/share/openocd/scripts/interface/jlink.cfg  -c "transport select swd" -s /Users/sundeqing/Library/Arduino15/packages/arduino/tools/openocd/0.9.0-arduino6-static/share/openocd/scripts -f /Users/sundeqing/Library/Arduino15/packages/arduino/tools/openocd/0.9.0-arduino6-static/share/openocd/scripts/target/at91samdXXCOPY.cfg 
 
