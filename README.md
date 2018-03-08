@@ -54,7 +54,7 @@ Depending on your tool version, GDB should be in somewhere like:
 
 ## Step 3, test whether OpenOCD and GDB is functional with terminal
 
-**Here is a tricky part.** For some reason, the Arduino zero's ID is different from the one in the OpenOCD target. Also, with a bootloader, we don't want to have debugger change the flash content. So I copied at91samdXX.cfg to at91samdXXZero.cfg in this repo to solve the issues
+**Here is a tricky part.** For some reason, the Arduino zero's ID is different from the one in the OpenOCD target. Also, with a bootloader, we don't want to have debugger change the flash content. So I copied at91samdXX.cfg to at91samdXXZero.cfg in this repo. I changed CPU ID and removed flash code to solve the issues.
 
 Open a terminal window and paste following commands. If your files are located in a different folder from mine, edit the path accordingly. Always change the username to yours.
 
@@ -69,7 +69,7 @@ The openocd command works in this way:
 openocd -f *config\_file\_for\_debugger* -f *config\_file\_for\_board\_or\_CPU* -s *dir\_to\_search\_for\_config\_files\_and\_scripts*
 
 
-If everthing works well, you should see it working:
+If everything works well, you should see it working:
 
 ![openocd working](https://github.com/DeqingSun/Debug-Arduino-Zero-with-ST-Link-V2/raw/master/img/openOcdWorking.png)
 
@@ -140,7 +140,7 @@ From here, you want to edit "miDebuggerPath", "debugServerPath" and "debugServer
 
 ![edited path](https://github.com/DeqingSun/Debug-Arduino-Zero-with-ST-Link-V2/raw/master/img/vscodeEdited.png)
 
-Now, you go back you code, add some variable (so you can see it) and upload code again before we debug it. You can also add breakpoints.
+Now, you go back your code, add some variable (so you can see it) and upload code again before we debug it. You can also add breakpoints.
 
 ![edited code](https://github.com/DeqingSun/Debug-Arduino-Zero-with-ST-Link-V2/raw/master/img/vscodeFinalCode.png)
 
