@@ -52,7 +52,7 @@ Depending on your tool version, GDB should be in somewhere like:
 
 ~/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/4.8.3-2014q1/bin/arm-none-eabi-gdb
 
-##Step 3, test whether OpenOCD and GDB is functional with terminal
+## Step 3, test whether OpenOCD and GDB is functional with terminal
 
 Open a terminal window and paste following commands. If your files are located in a different folder from mine, edit the path accordingly.
 
