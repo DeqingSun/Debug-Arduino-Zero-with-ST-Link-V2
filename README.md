@@ -1,5 +1,11 @@
 # Debug Arduino Zero with ST-Link V2
 
+## Update:
+
+ST-Link V2 has compability issue with SAMD21. This is not best way to debug.
+
+More info: [https://electronics.stackexchange.com/questions/250664/can-i-use-st-link-programmer-for-non-st-chips](https://electronics.stackexchange.com/questions/250664/can-i-use-st-link-programmer-for-non-st-chips)
+
 ## Overview
  
 Arduino Zero has an Atmel’s SAMD21 MCU with SWD debug support. The cheapest SWD debugger I know is a non-official ST-Link V2. It looks like a thumb drive with a 10-pin IDE on its end, and you can get it for around $2 from eBay or AliExpress, etc.

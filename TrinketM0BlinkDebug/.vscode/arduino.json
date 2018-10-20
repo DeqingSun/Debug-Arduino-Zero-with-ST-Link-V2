@@ -1,0 +1,5 @@
+{
+    "board": "adafruit:samd:adafruit_trinket_m0",
+    "port": "/dev/cu.usbmodem1413231",
+    "sketch": "TrinketM0BlinkDebug.ino"
+}
